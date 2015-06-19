@@ -1,5 +1,5 @@
-PostgreSQL Relation: requires
-=============================
+Requires: PostgreSQLClient
+==========================
 
 Example Usage
 -------------

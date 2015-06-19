@@ -1,5 +1,5 @@
-PostgreSQL Relation: provides
-=============================
+Provides: PostgreSQL
+====================
 
 Example Usage
 -------------
