@@ -26,7 +26,7 @@ This is what a charm using this relation would look like:
         if admin_pass:
             set_state('admin-pass')
         else:
-            remote_state('admin-pass')
+            remove_state('admin-pass')
 
     @when('db.database.available', 'admin-pass')
     def render_config(pgsql):
