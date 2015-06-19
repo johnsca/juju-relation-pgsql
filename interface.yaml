@@ -1,0 +1,3 @@
+name: pgsql
+summary: Interface for relating to PostgreSQL
+maintainer: "Cory Johns" <cory.johns@canonical.com>
