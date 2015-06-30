@@ -24,7 +24,7 @@ class PostgreSQL(RelationBase):
     # Thus, we use SERVICE scope and will have one converstaion per service.
     scope = scopes.SERVICE
 
-    @hook('{interface:pgsql}-relation-{joined,changed}')
+    @hook('{provides:pgsql}-relation-{joined,changed}')
     def joined_changed(self):
         """
         Handles the relation-joined and relation-changed hook.
@@ -51,7 +51,7 @@ class PostgreSQL(RelationBase):
         if self.previous_roles(service) != self.requested_roles(service):
             conversation.set_state('{relation_name}.roles.requested')
 
-    @not_until('{interface:pgsql}.database.requested')
+    @not_until('{provides:pgsql}.database.requested')
     def provide_database(self, service, host, port, database, user, password, schema_user, schema_password, state):
         """
         Provide a database to a requesting service.
@@ -82,7 +82,7 @@ class PostgreSQL(RelationBase):
         conversation.set_local('database', database)
         conversation.remove_state('{relation_name}.database.requested')
 
-    @not_until('{interface:pgsql}.roles.requested')
+    @not_until('{provides:pgsql}.roles.requested')
     def ack_roles(self, service, roles):
         """
         Acknowledge that a set of roles have been given to a service's user.

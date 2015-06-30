@@ -30,7 +30,7 @@ class PostgreSQLClient(RelationBase):
     auto_accessors = ['host', 'port', 'database', 'user', 'password',
                       'schema_user', 'schema_password']
 
-    @hook('{interface:pgsql}-relation-{joined,changed}')
+    @hook('{requires:pgsql}-relation-{joined,changed}')
     def changed(self):
         self.set_state('{relation_name}.connected')
         if self.connection_string():
