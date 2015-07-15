@@ -51,6 +51,14 @@ class PostgreSQL(RelationBase):
         if self.previous_roles(service) != self.requested_roles(service):
             conversation.set_state('{relation_name}.roles.requested')
 
+    @hook('{provides:pgsql}-relation-{broken,departed}')
+    def departed(self):
+        conversation = self.conversation()
+
+        # if these were requested but not yet fulfilled, cancel the request
+        conversation.remove_state('{relation_name}.database.requested')
+        conversation.remove_state('{relation_name}.roles.requested')
+
     @not_until('{provides:pgsql}.database.requested')
     def provide_database(self, service, host, port, database, user, password, schema_user, schema_password, state):
         """

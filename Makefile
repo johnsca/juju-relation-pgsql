@@ -18,7 +18,7 @@ clean:
 
 .PHONY: docclean
 docclean:
-	-rm -rf docs/_build
+	-rm -rf docs/build
 
 .venv:
 	@echo Processing apt package prereqs

@@ -36,6 +36,11 @@ class PostgreSQLClient(RelationBase):
         if self.connection_string():
             self.set_state('{relation_name}.database.available')
 
+    @hook('{requires:pgsql}-relation-{broken,departed}')
+    def departed(self):
+        self.remove_state('{relation_name}.connected')
+        self.remove_state('{relation_name}.database.available')
+
     def request_roles(self, *roles):
         """
         Tell the PostgreSQL server to provide our user with a certain set of roles.
